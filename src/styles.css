@@ -109,3 +109,55 @@
 .steps-summary-notes p{font-size:12px;line-height:1.75;color:#8b7384;margin:0}
 @media(max-width:1100px){.steps-summary-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:580px){.steps-summary-toolbar{padding:13px;gap:12px;flex-direction:column;align-items:stretch}.steps-period-tabs{display:flex}.steps-period-tabs button{flex:1}.steps-period-nav{justify-content:center}.steps-summary-stats{gap:8px}.steps-summary-stat{padding:13px 10px}.steps-summary-stat strong{font-size:22px}.steps-summary-stat>span{font-size:10px}.steps-summary-stat>small{font-size:9px}.steps-chart-head{display:block}.steps-target-chip{display:inline-flex;margin-top:11px}.step-chart-day{min-width:40px;width:40px}.steps-chart-plot{gap:4px}.steps-summary-cta .btn{font-size:11px;padding:10px}}
+
+/* Hydration & meal calorie insights (v1.1). */
+.daily-habits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:19px}
+.daily-habits>.steps-card{min-width:0;margin:0}
+.daily-habits .steps-card-heading{gap:9px}
+.daily-habits .steps-identity{gap:10px}
+.daily-habits .steps-numbers{margin-top:18px}
+.daily-habits .steps-entry-form{align-items:end}
+.water-card{background:linear-gradient(110deg,#fff,#f7fbff);border-color:#dceaf6}
+.water-icon{color:#2786b8!important;background:#e7f5fd!important}
+.water-progress{background:#e4f0f9}
+.water-progress>div{background:linear-gradient(90deg,#80cae9,#419eca)}
+.water-progress>div.reached{background:linear-gradient(90deg,#57ad79,#80cfa0)}
+.water-quick-add{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:17px 0 2px}
+.water-quick-add span{font-size:11px;font-weight:700;color:#786d78}
+.water-quick-add .btn{padding:7px 10px;font-size:11px}
+.daily-calorie-summary{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:#8c7485}
+.daily-calorie-summary strong{color:#a0577b;font-size:14px}
+.daily-calorie-note{font-size:10px;color:#aaa0a8;margin:9px 0 0;line-height:1.65}
+.meal-completeness{font-size:10px;font-weight:700;color:#ac939f}
+.meal-completeness.complete{color:#328656}
+.meal-calorie-box{background:#fdf8fa;border:1px solid #f3e4eb;border-radius:12px;padding:13px;margin-top:18px}
+.meal-calorie-header{display:flex;justify-content:space-between;align-items:center;gap:13px;flex-wrap:wrap}
+.meal-calorie-header>div{display:grid;gap:3px}.meal-calorie-header strong{font-size:13px;color:#675465}
+.meal-calorie-header span{color:#a496a1;font-size:10px}
+.meal-calorie-header .calorie-fraction{color:#a85b7f;font-size:16px;direction:ltr;unicode-bidi:isolate}
+.calorie-fraction small{font-size:10px}
+.calorie-progress{height:6px;background:#f1e2e9;border-radius:10px;overflow:hidden;margin:10px 0}
+.calorie-progress>div{background:#d09ab2;height:100%;border-radius:10px;transition:width .2s}
+.calorie-manual-field{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:11px;color:#81717e}
+.calorie-manual-field input{background:#fff;border:1px solid #e5d5de;border-radius:8px;padding:9px 11px;direction:ltr;text-align:center;width:115px;max-width:100%;color:#524453;font-size:12px}
+.calorie-hint{display:block;font-size:10px;color:#aa98a4;margin-top:7px;line-height:1.6}
+.calendar-day.all-goals-met{background:#d9f3e2;color:#196742;border-color:#8dd2aa;box-shadow:0 0 0 1px #b5e5c5 inset}
+.calendar-day.all-goals-met:not(:disabled):hover{background:#c7eed6}
+.calendar-day.all-goals-met.selected{background:#30885b;color:#fff;border-color:#287c53}
+.calendar-day.all-goals-met .day-dots i{background:#388859}
+.calendar-day.all-goals-met.selected .day-dots i{background:#fff}
+.calendar-day.all-goals-met .calendar-step-badge{color:#23764e;font-weight:800}
+.calendar-day.all-goals-met.selected .calendar-step-badge{color:#fff}
+.calendar-day.all-goals-met.is-today:not(.selected){border-color:#37885e;color:#196742}
+.calendar-water-badge{font-size:9px;line-height:1.05;white-space:nowrap;color:#2583b1;font-weight:800}
+.calendar-day.selected .calendar-water-badge{color:#fff}
+.calendar-water-recap,.calendar-calories-recap{background:#f6fbfe;border:1px solid #d9e9f3;border-radius:12px;padding:12px 14px;margin:0 0 13px;display:grid;gap:6px;color:#756775;font-size:12px}
+.calendar-calories-recap{background:#fff9fb;border-color:#f3e5ea;margin-bottom:22px}
+.calendar-water-recap strong,.calendar-calories-recap strong{font-size:13px;color:#564757}
+.calendar-water-recap .goal-success,.calendar-calories-recap .goal-success{color:#288658;font-weight:800}
+.calendar-water-recap .goal-pending{color:#a18548}
+.legend-green{color:#258253!important;font-weight:700}
+.legend-green i{width:10px;height:10px;border-radius:3px;background:#8fd1a8}
+.recap-meal-calories{font-weight:600;color:#a97991;font-size:10px}
+@media(max-width:1200px){.daily-habits{grid-template-columns:1fr}}
+@media(max-width:580px){.meal-calorie-header .calorie-fraction{font-size:14px}.meal-calorie-box{padding:11px}.daily-calorie-summary{font-size:10px}.calendar-water-badge{font-size:8px}.calendar-day{height:66px}.calendar-step-badge{font-size:7px}.daily-habits{gap:12px}}

@@ -30,7 +30,7 @@ export default function Settings({user,profile,setProfile,onNotify}) {
   }
   async function exportData(){
     setBusy(true);
-    const tables=['meal_logs','step_logs','weight_logs','measurement_logs'];
+    const tables=['meal_logs','step_logs','water_logs','weight_logs','measurement_logs'];
     const result=await Promise.all(tables.map(t=>supabase.from(t).select('*').eq('user_id',user.id).order('log_date')));
     setBusy(false);
     const error=result.find(r=>r.error)?.error;
@@ -41,7 +41,7 @@ export default function Settings({user,profile,setProfile,onNotify}) {
   return <div><SectionHeading eyebrow="החשבון שלי" title="ההגדרות האישיות" sub="תאריך התחלה, יעד אישי, פרטי חשבון וגיבוי הנתונים שלך."/>
     <div className="settings-grid"><section className="panel"><div className="panel-top"><h2><UserRound size={20}/> פרטי פרופיל</h2></div><form className="settings-form" onSubmit={saveProfile}><label>שם לתצוגה<input value={displayName} onChange={e=>setDisplayName(e.target.value)} maxLength={60} required/></label><label>תאריך תחילת התפריט<input type="date" value={startDate} onChange={e=>setStartDate(e.target.value)} required/></label><label>משקל יעד (ק״ג) — לא חובה<input type="number" value={targetWeight} onChange={e=>setTargetWeight(e.target.value)} step="0.1" min="25" max="400" placeholder="למשל 74"/></label><button className="btn btn-primary" disabled={busy}><Save size={17}/> שמירת פרטים</button></form><p className="fine-print">כברירת מחדל תחילת התוכנית היא 1.11.2026. משתמשות אחרות יכולות לשנות אותה באופן עצמאי.</p></section>
       <section className="panel"><div className="panel-top"><h2><LockKeyhole size={20}/> פרטיות ואבטחה</h2></div><p className="muted">מייל החשבון:</p><p dir="ltr" className="email-detail">{user.email}</p><form className="settings-form" onSubmit={changePassword}><label>סיסמה חדשה<input value={password} onChange={e=>setPassword(e.target.value)} type="password" minLength={8} required placeholder="8 תווים לפחות"/></label><button className="btn btn-outline" disabled={busy||password.length<8}>עדכון סיסמה</button></form><Notice>השיתוף האישי מנוהל בעמוד ״שיתוף״. שינוי או ביטול הרשאה משפיע מיד על גישה עתידית לנתונים באתר.</Notice></section>
-      <section className="panel settings-backup"><div className="panel-top"><h2><Database size={20}/> גיבוי הנתונים</h2></div><p>הורידי עותק של הארוחות, הצעדים, השקילות והמדידות האישיות שלך בקובץ JSON.</p><button className="btn btn-soft" disabled={busy} onClick={exportData}><Download size={18}/> הורדת גיבוי</button><p className="fine-print">קובץ הגיבוי מכיל נתונים אישיים. שמרי אותו במקום בטוח. האפשרות להעלאת גיבוי חזרה תוכל להתווסף בהמשך.</p></section>
+      <section className="panel settings-backup"><div className="panel-top"><h2><Database size={20}/> גיבוי הנתונים</h2></div><p>הורידי עותק של הארוחות, הצעדים, המים, השקילות והמדידות האישיות שלך בקובץ JSON.</p><button className="btn btn-soft" disabled={busy} onClick={exportData}><Download size={18}/> הורדת גיבוי</button><p className="fine-print">קובץ הגיבוי מכיל נתונים אישיים. שמרי אותו במקום בטוח. האפשרות להעלאת גיבוי חזרה תוכל להתווסף בהמשך.</p></section>
     </div>
   </div>;
 }

@@ -30,6 +30,15 @@ create table if not exists public.step_logs (
   primary key (user_id, log_date)
 );
 
+-- Daily water intake in milliliters; private to the account owner.
+create table if not exists public.water_logs (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  log_date date not null,
+  ml integer not null check (ml between 0 and 15000),
+  updated_at timestamptz not null default now(),
+  primary key (user_id,log_date)
+);
+
 create table if not exists public.weight_logs (
   user_id uuid not null references auth.users(id) on delete cascade,
   log_date date not null,
@@ -86,6 +95,7 @@ create table if not exists public.progress_invites (
 
 create index if not exists idx_meal_logs_user_month on public.meal_logs (user_id,log_date);
 create index if not exists idx_step_logs_user_date on public.step_logs (user_id, log_date);
+create index if not exists idx_water_logs_user_date on public.water_logs (user_id,log_date);
 create index if not exists idx_weight_logs_user_date on public.weight_logs (user_id,log_date);
 create index if not exists idx_measurement_logs_user_date on public.measurement_logs (user_id,log_date);
 create index if not exists idx_progress_invites_email on public.progress_invites (lower(invitee_email));
@@ -150,6 +160,7 @@ alter table public.profiles enable row level security;
 alter table public.meal_logs enable row level security;
 alter table public.weight_logs enable row level security;
 alter table public.step_logs enable row level security;
+alter table public.water_logs enable row level security;
 alter table public.measurement_logs enable row level security;
 alter table public.progress_shares enable row level security;
 alter table public.progress_invites enable row level security;
@@ -177,6 +188,15 @@ with check (user_id = (select auth.uid()));
 create policy "steps: update own" on public.step_logs for update to authenticated
 using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
 create policy "steps: delete own" on public.step_logs for delete to authenticated
+using (user_id = (select auth.uid()));
+
+create policy "water: select own" on public.water_logs for select to authenticated
+using (user_id = (select auth.uid()));
+create policy "water: insert own" on public.water_logs for insert to authenticated
+with check (user_id = (select auth.uid()));
+create policy "water: update own" on public.water_logs for update to authenticated
+using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
+create policy "water: delete own" on public.water_logs for delete to authenticated
 using (user_id = (select auth.uid()));
 
 create policy "weights: select own or explicitly shared" on public.weight_logs for select to authenticated
@@ -219,10 +239,10 @@ using (owner_id = (select auth.uid()) or lower(invitee_email) = lower(auth.jwt()
 
 -- Minimize grants and prevent client tampering with owner_id or grant recipient IDs.
 revoke all on public.profiles, public.meal_logs, public.weight_logs,
-  public.measurement_logs, public.step_logs, public.progress_shares, public.progress_invites from anon, authenticated;
+  public.measurement_logs, public.step_logs, public.water_logs, public.progress_shares, public.progress_invites from anon, authenticated;
 grant select on public.profiles to authenticated;
 grant update(display_name, start_date, target_weight) on public.profiles to authenticated;
-grant select, insert, update, delete on public.step_logs to authenticated;
+grant select, insert, update, delete on public.step_logs, public.water_logs to authenticated;
 grant select, insert, update, delete on public.meal_logs, public.weight_logs,
   public.measurement_logs to authenticated;
 grant select, delete on public.progress_shares to authenticated;
